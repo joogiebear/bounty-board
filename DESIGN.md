@@ -115,7 +115,7 @@ Saves only if something was expired or purged.
 `FileBountyStore(Path file)` implements `BountyStore`, YAML via `org.bukkit.configuration.file.YamlConfiguration` (it is allowed
 here, it does not need a server). `save` writes to a temp file in the same directory and moves it over the target atomically, creating
 parent directories. `load`: a missing file gives `new StoreData(List.of(), List.of(), 1)`; an unreadable or invalid file is renamed
-to `<name>.corrupt-<epoch millis>` next to it and an empty `StoreData` is returned (never throws). A round trip must preserve every
+to `<name>.corrupt-<epoch millis>` next to it and an empty `StoreData` is returned (never throws). This must hold on a live Bukkit server too, not only in a unit test without a server (do not rely on helpers that swallow parse errors). A round trip must preserve every
 field exactly (instants as epoch milliseconds, null `claimedBy` and `resolvedAt`, notices in order, `nextId`).
 
 ## Config, messages and formatting (stage 3)
@@ -151,11 +151,11 @@ that is not a player gets `console-only-player` for player-only subcommands. No 
 | `balance` | `balance` message |
 | `gui` | opens the board (stage 5) |
 | `admin give <player> <amount>` | needs `bounty.admin`; deposits coins via the economy; `admin-given` |
-| `admin reload` | reloads config and messages; `reloaded` |
+| `admin reload` | re-reads `config.yml` from disk and applies it immediately to the running plugin: every `Settings` value the service uses (limits, durations, tax, cooldown, refund rules, purge days), the messages, and `starting-balance` for players the economy has not seen yet; existing bounties and balances are kept; then `reloaded` |
 
 A subcommand with the wrong number of arguments shows `usage`. A `list` page that is not a whole number >= 1 gives `invalid-number`. `set` takes 2 or 3
 arguments, `list` 0 or 1, `mine`, `balance` and `gui` none, `cancel` 1, `admin give` 2, `admin reload` 0. `hours` must be a whole number (else `invalid-number`); so must the `cancel` id and the `admin give` amount (else `invalid-number`).
-The target name is matched exactly as typed (`Bukkit.getPlayerExact` for online players).
+Whole numbers that do not fit an `int` (more than 2147483647) are never truncated: an `hours` value that big gives `invalid-duration`, a `cancel` id that big gives `cancel-not-found`, and a `list` page that big is clamped to the last page. The target name is matched exactly as typed (`Bukkit.getPlayerExact` for online players).
 
 Default messages (config section `messages`; placeholders in braces; `&` colour codes are used as written):
 
@@ -226,5 +226,5 @@ the GUI with no bounties shows an empty page 1/1.
 `BountyBoardPlugin extends JavaPlugin` (in `...bountyboard.bukkit`) exposes `public BountyService service()` and `public Economy economy()` and a static
 test seam `public static void setClockForTests(Clock clock)` (null restores the system clock); `onEnable` builds the service with that clock (so a
 test sets the clock before loading the plugin). The resources `plugin.yml` and `config.yml` are provided; do not change them. `plugin.yml` (name `BountyBoard`, `api-version: "1.21"`, command `bounty`, permissions), default `config.yml`
-(all settings keys above plus `starting-balance` and an empty `messages:` section), `onEnable` loads config and messages, builds the store (`data.yml`), the
+(all settings keys above plus `starting-balance` and an empty `messages:` section), `onEnable` first calls `saveDefaultConfig()` so `config.yml` is written to the plugin folder when it does not exist yet, then loads config and messages, builds the store (`data.yml`), the
 service (system clock), the economy, registers the command, listeners and the expiry task, and logs one line per settings warning. `onDisable` saves.

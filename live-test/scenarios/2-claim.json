@@ -1,0 +1,76 @@
+{
+  "name": "bounty: carol kills bob and claims alice's bounty",
+  "instance": "test",
+  "bots": [
+    "alice",
+    "bob",
+    "carol"
+  ],
+  "setup": [
+    "op carol",
+    "gamemode survival bob",
+    "gamemode survival carol"
+  ],
+  "steps": [
+    {
+      "bot": "carol",
+      "command": "/bounty balance"
+    },
+    {
+      "bot": "carol",
+      "expectMessage": "Balance: 1,000 coins",
+      "timeout": 3000
+    },
+    {
+      "bot": "carol",
+      "command": "/bounty list"
+    },
+    {
+      "bot": "carol",
+      "expectMessage": "Bounties (page 1/1, 1 total)",
+      "timeout": 3000
+    },
+    {
+      "bot": "carol",
+      "command": "/damage bob 1000 minecraft:player_attack by carol"
+    },
+    {
+      "bot": "carol",
+      "expectMessage": "You collected 95 coins (5 tax).",
+      "timeout": 8000
+    },
+    {
+      "bot": "carol",
+      "expectMessage": "carol claimed 100 coins of bounties on bob!",
+      "timeout": 3000
+    },
+    {
+      "bot": "alice",
+      "expectMessage": "Your bounty #1 was claimed by carol.",
+      "timeout": 5000
+    },
+    {
+      "bot": "carol",
+      "command": "/bounty balance"
+    },
+    {
+      "bot": "carol",
+      "expectMessage": "Balance: 1,095 coins",
+      "timeout": 3000
+    },
+    {
+      "bot": "alice",
+      "command": "/bounty list"
+    },
+    {
+      "bot": "alice",
+      "expectMessage": "There are no active bounties.",
+      "timeout": 3000
+    },
+    {
+      "expectLog": {
+        "absent": "/Exception|ERROR/"
+      }
+    }
+  ]
+}

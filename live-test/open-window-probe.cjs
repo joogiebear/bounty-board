@@ -1,0 +1,8 @@
+const mineflayer = require('/home/debian/.local/share/mcctl/bot-host/node_modules/mineflayer')
+const bot = mineflayer.createBot({ host: '127.0.0.1', port: 25565, username: 'dbg', version: '1.21.11' })
+bot.on('windowOpen', (w) => console.log('windowOpen type=' + w.type + ' title=' + JSON.stringify(w.title) + ' slots=' + w.slots.length))
+bot._client.on('open_window', (p) => console.log('open_window packet ' + JSON.stringify(p).slice(0, 400)))
+bot.on('message', (m) => console.log('msg ' + m.toString()))
+bot.on('error', (e) => console.log('error ' + e.message))
+bot.on('kicked', (r) => console.log('kicked ' + r))
+bot.once('spawn', () => { setTimeout(() => bot.chat('/bounty gui'), 2000); setTimeout(() => process.exit(0), 7000) })

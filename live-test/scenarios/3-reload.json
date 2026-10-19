@@ -1,0 +1,19 @@
+{
+  "name": "bounty: reload applies a changed limit, then post a 1 hour bounty",
+  "instance": "test",
+  "bots": ["alice", "bob"],
+  "setup": ["op alice", "gamemode survival bob"],
+  "steps": [
+    { "bot": "alice", "command": "/bounty set bob 400" },
+    { "bot": "alice", "expectMessage": "Bounty #2 posted on bob for 400 coins.", "timeout": 3000 },
+    { "bot": "alice", "command": "/bounty cancel 2" },
+    { "bot": "alice", "expectMessage": "Bounty #2 cancelled, 400 coins refunded.", "timeout": 3000 },
+    { "bot": "alice", "command": "/bounty admin reload" },
+    { "bot": "alice", "expectMessage": "Configuration reloaded.", "timeout": 3000 },
+    { "bot": "alice", "command": "/bounty set bob 400" },
+    { "bot": "alice", "expectMessage": "The maximum bounty is 300 coins.", "timeout": 3000 },
+    { "bot": "alice", "command": "/bounty set bob 200 1" },
+    { "bot": "alice", "expectMessage": "Bounty #3 posted on bob for 200 coins.", "timeout": 3000 },
+    { "expectLog": { "absent": "/Exception|ERROR/" } }
+  ]
+}

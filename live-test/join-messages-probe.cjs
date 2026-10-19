@@ -1,0 +1,15 @@
+const mineflayer = require('/home/debian/.local/share/mcctl/bot-host/node_modules/mineflayer')
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
+;(async () => {
+  await sleep(Number(process.argv[3] || 0) * 1000)
+  const bot = mineflayer.createBot({ host: '127.0.0.1', port: 25565, username: process.argv[2], version: '1.21.11' })
+  bot.on('message', (m) => console.log('msg ' + m.toString()))
+  bot.on('error', (e) => console.log('error ' + e.message))
+  bot.once('spawn', async () => {
+    await sleep(2500)
+    bot.chat('/bounty balance'); await sleep(800)
+    bot.chat('/bounty list'); await sleep(800)
+    bot.chat('/bounty mine'); await sleep(800)
+    process.exit(0)
+  })
+})()

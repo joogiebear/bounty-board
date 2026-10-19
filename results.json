@@ -1,0 +1,87 @@
+[
+  {
+    "stage": 1,
+    "first_attempt_s": 183,
+    "first_failures": [],
+    "rounds": [],
+    "clean": true,
+    "wall_s": 190
+  },
+  {
+    "stage": 2,
+    "first_attempt_s": 529,
+    "first_failures": [],
+    "rounds": [],
+    "clean": true,
+    "wall_s": 536
+  },
+  {
+    "stage": 3,
+    "first_attempt_s": 232,
+    "first_failures": [],
+    "rounds": [],
+    "clean": true,
+    "wall_s": 239
+  },
+  {
+    "stage": 4,
+    "first_attempt_s": 601,
+    "first_failures": [
+      "Compile: BountyListener.java:10: cannot find symbol",
+      "Compile: BountyListener.java:24: cannot find symbol",
+      "Compile: BuiltinEconomy.java:9: package org.bukkit.logging does not exist",
+      "Compile: BuiltinEconomy.java:15: cannot find symbol",
+      "Compile: BuiltinEconomy.java:18: cannot find symbol",
+      "Compile: BountyCommand.java:188: cannot find symbol",
+      "Compile: BountyListener.java:10: cannot find symbol",
+      "Compile: BountyListener.java:24: cannot find symbol",
+      "Compile: BuiltinEconomy.java:15: cannot find symbol",
+      "Compile: BuiltinEconomy.java:18: cannot find symbol",
+      "Compile: ...and 2 more errors"
+    ],
+    "rounds": [
+      {
+        "model_s": 170,
+        "before": 11,
+        "after": 1,
+        "remaining": [
+          "Test failed: CommandsTest > listWithNoBounties(): org.opentest4j.AssertionFailedError: expected: <[[Bounty] There are no active bounties.]> but was: <[[Bounty] Bounties (page 1/1, 0 total), [Bounty] There are no active bounties.]>"
+        ]
+      },
+      {
+        "model_s": 67,
+        "before": 1,
+        "after": 0,
+        "remaining": []
+      }
+    ],
+    "clean": true,
+    "wall_s": 858
+  },
+  {
+    "stage": 5,
+    "first_attempt_s": 251,
+    "first_failures": [],
+    "rounds": [],
+    "clean": true,
+    "wall_s": 259
+  },
+  {
+    "stage": 6,
+    "first_attempt_s": 516,
+    "first_failures": [
+      "Test failed: HeldFileStoreTest > afterQuarantineTheStoreIsUsableAgain(): org.opentest4j.AssertionFailedError: expected: <2> but was: <1>",
+      "Test failed: HeldFileStoreTest > syntaxErrorIsRenamedAndEmptyDataReturned(): org.opentest4j.AssertionFailedError: the bad file must be moved away ==> expected: <false> but was: <true>"
+    ],
+    "rounds": [
+      {
+        "model_s": 401,
+        "before": 2,
+        "after": 0,
+        "remaining": []
+      }
+    ],
+    "clean": true,
+    "wall_s": 936
+  }
+]
