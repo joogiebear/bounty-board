@@ -1,0 +1,17 @@
+name: BountyBoard
+version: 0.1.0
+main: dev.joogiebear.bountyboard.bukkit.BountyBoardPlugin
+api-version: "1.21"
+description: Post bounties on players and claim them by killing them.
+commands:
+  bounty:
+    description: Post, list, cancel and claim bounties
+    usage: /bounty <set|list|mine|cancel|balance|gui>
+    permission: bounty.use
+permissions:
+  bounty.use:
+    description: Use the bounty commands
+    default: true
+  bounty.admin:
+    description: Cancel any bounty, give coins, reload
+    default: op

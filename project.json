@@ -1,0 +1,77 @@
+{
+  "ws": "/srv/bounty/shop",
+  "max_rounds": 4,
+  "protected": [
+    "DESIGN.md",
+    "build.gradle.kts",
+    "settings.gradle.kts",
+    "src/main/resources/plugin.yml",
+    "src/main/resources/config.yml",
+    "src/main/java/dev/joogiebear/bountyboard/core/BountyStatus.java",
+    "src/main/java/dev/joogiebear/bountyboard/core/Bounty.java",
+    "src/main/java/dev/joogiebear/bountyboard/core/NoticeType.java",
+    "src/main/java/dev/joogiebear/bountyboard/core/Notice.java",
+    "src/main/java/dev/joogiebear/bountyboard/core/StoreData.java",
+    "src/main/java/dev/joogiebear/bountyboard/core/BountyStore.java",
+    "src/main/java/dev/joogiebear/bountyboard/core/Economy.java",
+    "src/main/java/dev/joogiebear/bountyboard/core/Settings.java",
+    "src/main/java/dev/joogiebear/bountyboard/core/Page.java",
+    "src/main/java/dev/joogiebear/bountyboard/core/CreateStatus.java",
+    "src/main/java/dev/joogiebear/bountyboard/core/CreateResult.java",
+    "src/main/java/dev/joogiebear/bountyboard/core/CancelStatus.java",
+    "src/main/java/dev/joogiebear/bountyboard/core/CancelResult.java",
+    "src/main/java/dev/joogiebear/bountyboard/core/ClaimResult.java"
+  ],
+  "stages": [
+    {
+      "n": "1",
+      "brief": "tasks/01-service.md",
+      "tests": "stage1",
+      "files": [
+        "src/main/java/dev/joogiebear/bountyboard/core/BountyService.java"
+      ]
+    },
+    {
+      "n": "2",
+      "brief": "tasks/02-store.md",
+      "tests": "stage2",
+      "files": [
+        "src/main/java/dev/joogiebear/bountyboard/core/FileBountyStore.java"
+      ]
+    },
+    {
+      "n": "3",
+      "brief": "tasks/03-config.md",
+      "tests": "stage3",
+      "files": [
+        "src/main/java/dev/joogiebear/bountyboard/core/BountySettings.java",
+        "src/main/java/dev/joogiebear/bountyboard/core/Format.java",
+        "src/main/java/dev/joogiebear/bountyboard/bukkit/Messages.java"
+      ]
+    },
+    {
+      "n": "4",
+      "brief": "tasks/04-plugin.md",
+      "tests": "stage4",
+      "files": [
+        "src/main/java/dev/joogiebear/bountyboard/bukkit/BountyBoardPlugin.java",
+        "src/main/java/dev/joogiebear/bountyboard/bukkit/BountyCommand.java",
+        "src/main/java/dev/joogiebear/bountyboard/bukkit/BountyListener.java",
+        "src/main/java/dev/joogiebear/bountyboard/bukkit/BuiltinEconomy.java",
+        "src/main/java/dev/joogiebear/bountyboard/bukkit/ExpiryTask.java",
+        "src/main/java/dev/joogiebear/bountyboard/bukkit/NoticeDelivery.java"
+      ]
+    },
+    {
+      "n": "5",
+      "brief": "tasks/05-gui.md",
+      "tests": "stage5",
+      "files": [
+        "src/main/java/dev/joogiebear/bountyboard/bukkit/BountyGui.java",
+        "src/main/java/dev/joogiebear/bountyboard/bukkit/GuiListener.java",
+        "src/main/java/dev/joogiebear/bountyboard/bukkit/BountyCommand.java",
+        "src/main/java/dev/joogiebear/bountyboard/bukkit/BountyBoardPlugin.java"
+      ]
+    }
+  ]
+}

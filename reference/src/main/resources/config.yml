@@ -1,0 +1,17 @@
+# BountyBoard configuration
+min-amount: 10
+max-amount: 1000000
+max-active-per-player: 3
+default-hours: 24
+max-hours: 72
+tax-percent: 5
+claim-cooldown-minutes: 10
+cancel-full-refund-minutes: 5
+cancel-refund-percent: 80
+purge-resolved-after-days: 7
+# coins a new player starts with (built-in economy)
+starting-balance: 1000
+# override any message here by its key, for example:
+# messages:
+#   prefix: "&6[Bounty] &r"
+messages: {}
